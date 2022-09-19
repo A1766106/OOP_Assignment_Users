@@ -11,10 +11,7 @@ using namespace std;
 
 Investor::Investor()
 {
-    User_Name = "Guest";
-    User_ID = 0;
-    User_Password = "";
-    Investor_Broker = "";
+
     Cost_Base = 0;
     Share_Count = 0;
     Portfolio = new Share[20];
@@ -99,7 +96,7 @@ bool Investor::Check_For_ID_Duplicate(int ID)
     while(getline(Accounts, line))
     {
         stringstream ss(line);
-        getline(ss, myID, ',');
+        getline(ss,myID,',');
         Temp_ID = stoi(myID);
         if(Temp_ID == ID)
         {
@@ -108,6 +105,7 @@ bool Investor::Check_For_ID_Duplicate(int ID)
     }
     Accounts.close();  
     return true;
+
 }
 
 void Investor::Set_Details()
@@ -116,11 +114,19 @@ void Investor::Set_Details()
     cin >> User_Name;
     cout << "Please enter User ID: ";
     cin >> User_ID;
-    while(Check_For_ID_Duplicate(User_ID) == 0)
+    int Valid = -1;
+    if(Check_For_ID_Duplicate(User_ID))
+    {
+        Valid = 1;
+    }
+    while(Valid != 0)
     {
         cout << "You entered the ID of an already existing account! Please enter a different User ID: ";
         cin >> User_ID;
-        int valid_ID = Check_For_ID_Duplicate(User_ID);
+            if(Check_For_ID_Duplicate(User_ID))
+            {
+                Valid = 1;
+            }
     }
     string Chosen_broker;
     cout << "What is your Brokers name: ";
@@ -133,8 +139,9 @@ void Investor::Set_Details()
     this->User_Password = User_Password;
     Investor_Broker = Chosen_broker;
 
-    ofstream Accounts("Accounts.csv");
-    Accounts << User_ID << "," << User_Password << "," << User_Name << "," << Investor_Broker << ",,,\n";
+    ofstream Accounts;
+    Accounts.open("Accounts.csv", fstream::app);
+    Accounts << this->User_ID << "," << this->User_Password << "," << this->User_Name << "," << this->Investor_Broker << ",,,\n";
     Accounts.close();
 }
 
