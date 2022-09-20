@@ -23,10 +23,10 @@ Investor::Investor(int User_ID)
     this->User_ID = User_ID;
     if(Check_ID(User_ID))
     {
-    //     string Entered_Password;
-    //     int Attempts = 0;
-    //     while(Attempts < 3)
-    //     {
+        string Entered_Password = "";
+        int Attempts = 0;
+        while(Attempts < 3 && Check_Password(User_ID, Entered_Password))
+        {
     //         cout << "Please enter your password: ";
     //         cin >> Entered_Password;
     //         if(Check_Password(User_ID, Entered_Password))
@@ -51,7 +51,7 @@ Investor::Investor(int User_ID)
 
 
     //         }
-    //     }
+        }
     }
 }
 int Investor::Get_Cost_Base()
