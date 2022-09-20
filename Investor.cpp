@@ -18,15 +18,41 @@ Investor::Investor()
     Set_Details();
 
 }
-Investor::Investor(std::string User_Name, int User_ID, std::string User_Password, std::string Investor_Broker)
+Investor::Investor(int User_ID)
 {
-    this->User_Name = User_Name;
     this->User_ID = User_ID;
-    this->User_Password = User_Password;
-    this->Investor_Broker = Investor_Broker;
-    Cost_Base = 0;
-    Share_Count = 0;
-    Portfolio = new Share[20]; 
+    if(Check_ID(User_ID))
+    {
+    //     string Entered_Password;
+    //     int Attempts = 0;
+    //     while(Attempts < 3)
+    //     {
+    //         cout << "Please enter your password: ";
+    //         cin >> Entered_Password;
+    //         if(Check_Password(User_ID, Entered_Password))
+    //         {
+    //             Set_Existing_Details(User_ID);
+    //             break;
+    //         }
+    //         else
+    //         {
+    //             cout << "That password doesn't match the ID you selected! " << endl;
+    //             Attempts++;
+    //         }
+    //         if(Attempts == 3)
+    //         {
+    //             cout << "You failed to get the password! Lets sign you in as guest instead! (Please note this is a public account) " << endl;
+    //             this->User_ID = 0;
+    //             this->User_Name = "Guest";
+    //             this->User_Password = "";
+    //             Cost_Base = 0;
+    //             Share_Count = 0;
+    //             Portfolio = new Share[20]; 
+
+
+    //         }
+    //     }
+    }
 }
 int Investor::Get_Cost_Base()
 {
@@ -135,6 +161,20 @@ void Investor::Set_Details()
     Accounts.open("Accounts.csv", fstream::app);
     Accounts << this->User_ID << "," << this->User_Password << "," << this->User_Name << "," << this->Investor_Broker << ",,,\n";
     Accounts.close();
+}
+void Set_Existing_Details(int Entered_ID)
+{
+    cout << "Green Light" << Entered_ID << endl;;
+}
+
+bool Check_ID(int Entered_ID)
+{
+    return true;
+}
+
+bool Investor::Check_Password(int Entered_ID, std::string Entered_Password)
+{
+    return false;
 }
 
 Investor::~Investor(){}
