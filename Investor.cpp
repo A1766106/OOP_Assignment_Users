@@ -100,11 +100,12 @@ bool Investor::Check_For_ID_Duplicate(int ID)
         Temp_ID = stoi(myID);
         if(Temp_ID == ID)
         {
-            return false;
+          return false;
         }
     }
     Accounts.close();  
     return true;
+    
 
 }
 
@@ -114,19 +115,10 @@ void Investor::Set_Details()
     cin >> User_Name;
     cout << "Please enter User ID: ";
     cin >> User_ID;
-    int Valid = -1;
-    if(Check_For_ID_Duplicate(User_ID))
-    {
-        Valid = 1;
-    }
-    while(Valid != 0)
+    while(!Check_For_ID_Duplicate(User_ID))
     {
         cout << "You entered the ID of an already existing account! Please enter a different User ID: ";
         cin >> User_ID;
-            if(Check_For_ID_Duplicate(User_ID))
-            {
-                Valid = 1;
-            }
     }
     string Chosen_broker;
     cout << "What is your Brokers name: ";
